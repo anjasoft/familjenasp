@@ -1,0 +1,8 @@
+sudo docker run -d -p 8080:80 \
+  --name "/internal-web01" \
+  --restart "" \
+  --network "macvlan0" \
+  --network-alias "internal-web01" \
+  --ip=192.168.0.204 \
+  --hostname "internal-web01" \
+  "familjenasp-internal-web:latest" \

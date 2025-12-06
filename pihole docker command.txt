@@ -1,0 +1,34 @@
+sudo docker run \
+  --name "/pihole01" \
+  --runtime "runc" \
+  --volume "/volume1/docker/pihole/dnsmasq.d:/etc/dnsmasq.d:rw" \
+  --volume "/volume1/docker/pihole/pihole:/etc/pihole:rw" \
+  --log-driver "db" \
+  --restart "" \
+  --network "macvlan0" \
+  --network-alias "2b0fb713cf4e" \
+  --network-alias "pihole01" \
+  --ip=192.168.0.200 \
+  --hostname "pihole01" \
+  --expose "123/udp" \
+  --expose "443/tcp" \
+  --expose "53/tcp" \
+  --expose "53/udp" \
+  --expose "67/udp" \
+  --expose "80/tcp" \
+  --env "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  --env "DNSMASQ_USER=pihole" \
+  --env "FTL_CMD=no-daemon" \
+  --label "org.opencontainers.image.created"="2025-11-27T18:41:55.252Z" \
+  --label "org.opencontainers.image.description"="The official Pi-hole Docker image from pi-hole.net" \
+  --label "org.opencontainers.image.licenses"="NOASSERTION" \
+  --label "org.opencontainers.image.revision"="8d7671af35eaf75069e1de88678690ac1abd5a9c" \
+  --label "org.opencontainers.image.source"="https://github.com/pi-hole/docker-pi-hole" \
+  --label "org.opencontainers.image.title"="docker-pi-hole" \
+  --label "org.opencontainers.image.url"="https://github.com/pi-hole/docker-pi-hole" \
+  --label "org.opencontainers.image.version"="2025.11.1" \
+  --detach \
+  --tty \
+  --interactive \
+  --entrypoint "start.sh" \
+  "pihole/pihole:latest" \

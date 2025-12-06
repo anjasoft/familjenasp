@@ -1,0 +1,37 @@
+sudo docker run \
+  --name "/nodered01" \
+  --runtime "runc" \
+  --volume "/volume1/docker/node_red_data:/data:rw" \
+  --log-driver "db" \
+  --restart "always" \
+  --network "macvlan0" \
+  --network-alias "c433f5c76b3b" \
+  --network-alias "nodered01" \
+  --hostname "nodered01" \
+  --ip=192.168.0.201 \
+  --expose "1880/tcp" \
+  --user "node-red" \
+  --env "PATH=/usr/src/node-red/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  --env "NODE_VERSION=20.19.6" \
+  --env "YARN_VERSION=1.22.22" \
+  --env "NODE_RED_VERSION=v4.1.2" \
+  --env "NODE_PATH=/usr/src/node-red/node_modules:/data/node_modules" \
+  --env "FLOWS=flows.json" \
+  --label "authors"="Dave Conway-Jones, Nick O'Leary, James Thomas, Raymond Mouthaan" \
+  --label "org.label-schema.arch"="" \
+  --label "org.label-schema.build-date"="2025-12-03T16:36:06Z" \
+  --label "org.label-schema.description"="Low-code programming for event-driven applications." \
+  --label "org.label-schema.docker.dockerfile"=".docker/Dockerfile.alpine" \
+  --label "org.label-schema.license"="Apache-2.0" \
+  --label "org.label-schema.name"="Node-RED" \
+  --label "org.label-schema.url"="https://nodered.org" \
+  --label "org.label-schema.vcs-ref"="" \
+  --label "org.label-schema.vcs-type"="Git" \
+  --label "org.label-schema.vcs-url"="https://github.com/node-red/node-red-docker" \
+  --label "org.label-schema.version"="4.1.2" \
+  --label "org.opencontainers.image.source"="https://github.com/node-red/node-red-docker" \
+  --detach \
+  --tty \
+  --interactive \
+  --entrypoint "./entrypoint.sh" \
+  "nodered/node-red:latest" \

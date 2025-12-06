@@ -1,0 +1,43 @@
+sudo docker run \
+  --name "/homeassistant01" \
+  --runtime "runc" \
+  --volume "/volume1/docker/filestore01/config:/config:rw" \
+  --log-driver "db" \
+  --restart "always" \
+  --network "macvlan0" \
+  --network-alias "7c20e247ba94" \
+  --network-alias "homeassistant01" \
+  --hostname "homeassistant01" \
+  --ip=192.168.0.202 \
+  --env "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+  --env "LANG=C.UTF-8" \
+  --env "S6_BEHAVIOUR_IF_STAGE2_FAILS=2" \
+  --env "S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0" \
+  --env "S6_CMD_WAIT_FOR_SERVICES=1" \
+  --env "S6_SERVICES_READYTIME=50" \
+  --env "UV_EXTRA_INDEX_URL=https://wheels.home-assistant.io/musllinux-index/" \
+  --env "S6_SERVICES_GRACETIME=240000" \
+  --env "UV_SYSTEM_PYTHON=true" \
+  --env "UV_NO_CACHE=true" \
+  --env "TZ=Europe/Stockholm" \
+  --label "io.hass.arch"="amd64" \
+  --label "io.hass.base.arch"="amd64" \
+  --label "io.hass.base.image"="ghcr.io/home-assistant/amd64-base:3.22" \
+  --label "io.hass.base.name"="python" \
+  --label "io.hass.base.version"="2025.10.1" \
+  --label "io.hass.type"="core" \
+  --label "io.hass.version"="2025.11.3" \
+  --label "org.opencontainers.image.authors"="The Home Assistant Authors" \
+  --label "org.opencontainers.image.created"="2025-11-21 17:08:29+00:00" \
+  --label "org.opencontainers.image.description"="Open-source home automation platform running on Python 3" \
+  --label "org.opencontainers.image.documentation"="https://www.home-assistant.io/docs/" \
+  --label "org.opencontainers.image.licenses"="Apache-2.0" \
+  --label "org.opencontainers.image.source"="https://github.com/home-assistant/core" \
+  --label "org.opencontainers.image.title"="Home Assistant" \
+  --label "org.opencontainers.image.url"="https://www.home-assistant.io/" \
+  --label "org.opencontainers.image.version"="2025.11.3" \
+  --detach \
+  --tty \
+  --interactive \
+  --entrypoint "/init" \
+  "homeassistant/home-assistant:stable" \
